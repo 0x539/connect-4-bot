@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FourInARow
+namespace Connect_4_Bot
 {
     public enum FieldState
     {

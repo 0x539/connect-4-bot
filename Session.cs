@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
-namespace FourInARow
+namespace Connect_4_Bot
 {
     public class Session
     {

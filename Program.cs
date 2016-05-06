@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace FourInARow
+namespace Connect_4_Bot
 {
     class Program
     {

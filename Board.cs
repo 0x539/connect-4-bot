@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace FourInARow
+namespace Connect_4_Bot
 {
     public class Board
     {
