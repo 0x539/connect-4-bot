@@ -9,16 +9,24 @@ namespace Connect_4_Bot
 
     public class Strategy : IStrategy
     {
-        public int round;
+        private int _playerId;
+        private AlphaBeta algorithm;
+
+        public Strategy()
+        {
+            this.algorithm = new AlphaBeta();
+        }
 
         public int NextMove(Board board)
         {
-            if (round > board.ColsNumber() - 1)
-            {
-                round = 0;
-            }
+            this._playerId = board.GetMyBotId();
 
-            return round++;
+            return board.round % 7;
+        }
+
+        private double EvaluateBoard(Board board)
+        {
+            return 23.45989;
         }
     }
 

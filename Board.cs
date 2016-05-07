@@ -3,20 +3,20 @@ using System.Text;
 
 namespace Connect_4_Bot
 {
-    public class Board
+    public class Board : ICloneable
     {
-        public int[][] _boardArray { get; set; }
+        public int[][] BoardArray { get; set; }
         private int _mybotId;
 
         public int round {
             get
             {
                 int count = 0;
-                for (int x = 0; x < this._boardArray.Length; x++)
+                for (int x = 0; x < this.BoardArray.Length; x++)
                 {
-                    for (int y = 0; y < this._boardArray[x].Length; y++)
+                    for (int y = 0; y < this.BoardArray[x].Length; y++)
                     {
-                        if (this._boardArray[x][y] != 0)
+                        if (this.BoardArray[x][y] != 0)
                         {
                             count++;
                         }
@@ -27,6 +27,11 @@ namespace Connect_4_Bot
             }
         }
 
+        public int GetMyBotId()
+        {
+            return this._mybotId;
+        }
+
         public void SetMyBotId(int myBotId)
         {
             _mybotId = myBotId;
@@ -34,23 +39,23 @@ namespace Connect_4_Bot
 
         public void Update(int[][] boardArray)
         {
-            _boardArray = boardArray;
+            BoardArray = boardArray;
         }
 
         public int ColsNumber()
         {
-            return _boardArray[0].Length;
+            return BoardArray[0].Length;
         }
 
         private int RowsNumber()
         {
-            return _boardArray.Length;
+            return BoardArray.Length;
         }
 
         public FieldState State(int col, int row)
         {
-            if (_boardArray[row][col] == 0) return FieldState.Free;
-            if (_boardArray[row][col] == _mybotId) return FieldState.Me;
+            if (BoardArray[row][col] == 0) return FieldState.Free;
+            if (BoardArray[row][col] == _mybotId) return FieldState.Me;
             return FieldState.Opponent;
         }
 
@@ -61,7 +66,7 @@ namespace Connect_4_Bot
             {
                 for (int j = 0; j < ColsNumber(); j++)
                 {
-                    sb.Append(_boardArray[i][j]).Append(" ");
+                    sb.Append(BoardArray[i][j]).Append(" ");
                 }
                 sb.Append(Environment.NewLine);
             }
@@ -70,7 +75,7 @@ namespace Connect_4_Bot
 
         public void MakeMove(int column, int player)
         {
-            if (column > this._boardArray.Length)
+            if (column > this.BoardArray.Length)
             {
                 return;
             }
@@ -79,14 +84,33 @@ namespace Connect_4_Bot
 
             for (int x = totalRows - 1; x >= 0; x--)
             {
-                int[] row = this._boardArray[x];
+                int[] row = this.BoardArray[x];
 
                 if (row[column] == 0)
                 {
-                    this._boardArray[x][column] = player;
+                    this.BoardArray[x][column] = player;
                     break;
                 }
             }
+        }
+
+        public object Clone()
+        {
+            Board n = new Board();
+
+            n.BoardArray = this.BoardArray;
+
+            return n;
+        }
+
+        public bool IsTerminal(bool player)
+        {
+            return true;
+        }
+
+        public int GetTotalScore(bool player)
+        {
+            return player ? 100 : 0;
         }
     }
 }
