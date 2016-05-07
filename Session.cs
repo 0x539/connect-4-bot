@@ -7,7 +7,21 @@ namespace Connect_4_Bot
 {
     public class Session
     {
-        
+        private int[][] generateEmptyBoard()
+        {
+            int columns = 7;
+            int rows = 6;
+
+            int[][] n = new int[rows][];
+
+            for (int x = 0; x < n.Length; x++)
+            {
+                n[x] = new int[columns];
+            }
+
+            return n;
+        }
+
         public void Run()
         {
             Console.SetIn(new StreamReader(Console.OpenStandardInput(512)));
@@ -15,6 +29,8 @@ namespace Connect_4_Bot
             
             Board board = new Board();
             IStrategy strategy = new Strategy();
+
+            board.Update(this.generateEmptyBoard());
 
             while ((line = Console.ReadLine()) != null)
             {
@@ -24,6 +40,9 @@ namespace Connect_4_Bot
 
                 switch (parts[0])
                 {
+                    case "state":
+                        Console.WriteLine(board.ToString());
+                        break;
                     case "settings":
                         switch (parts[1])
                         {
@@ -49,6 +68,7 @@ namespace Connect_4_Bot
                         break;
                     case "action":
                         var move = strategy.NextMove(board);
+                        board.makeMove(move);
                         Console.WriteLine("place_disc {0}", move);
                         break;
                 }

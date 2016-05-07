@@ -49,7 +49,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <Compile Include="Testing.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Board.cs" />

@@ -2,7 +2,6 @@
 
 namespace Connect_4_Bot
 {
-
     public interface IStrategy
     {
         int NextMove(Board board);
@@ -10,12 +9,16 @@ namespace Connect_4_Bot
 
     public class Strategy : IStrategy
     {
+        public int move;
+
         public int NextMove(Board board)
         {
-            //TODO: write your code to choose best move on current board
-            Random r = new Random();
-            var col = r.Next(board.ColsNumber());
-            return col;
+            if (move > board.ColsNumber() - 1)
+            {
+                move = 0;
+            }
+
+            return move++;
         }
     }
 

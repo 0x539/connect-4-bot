@@ -3,9 +3,9 @@ using System.Text;
 
 namespace Connect_4_Bot
 {
-    public class Board
+    public class Board : ICloneable
     {
-        private int[][] _boardArray;
+        public int[][] _boardArray { get; set; }
         private int _mybotId;
 
         public void SetMyBotId(int myBotId)
@@ -47,6 +47,44 @@ namespace Connect_4_Bot
                 sb.Append(Environment.NewLine);
             }
             return sb.ToString();
+        }
+
+        public void makeMove(int column)
+        {
+            this._boardArray[column] = this.addChip(this._boardArray[column]);
+        }
+
+        public object Clone()
+        {
+            Board n = new Board();
+
+            n.Update(this._boardArray);
+
+            return n;
+        }
+
+        private int[] addChip(int[] current)
+        {
+            if (current[current.Length - 1] != 0)
+            {
+                return current;
+            }
+
+            for (int x = 0; x < current.Length; x++)
+            {
+                if (x == current.Length - 1)
+                {
+                    current[current.Length - 1] = 1;
+                    break;
+                }
+                else if (current[x] != 0)
+                {
+                    current[x - 1] = 1;
+                    break;
+                }
+            }
+
+            return current;
         }
     }
 }
