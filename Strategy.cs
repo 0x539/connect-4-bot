@@ -11,11 +11,6 @@ namespace Connect_4_Bot
     {
         public int round;
 
-        public Strategy()
-        {
-            this.round = 0;
-        }
-
         public int NextMove(Board board)
         {
             if (round > board.ColsNumber() - 1)

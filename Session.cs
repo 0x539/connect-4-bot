@@ -70,7 +70,7 @@ namespace Connect_4_Bot
                         break;
                     case "action":
                         var move = strategy.NextMove(board);
-                        board.MakeMove(move, (round++ % 2) + 1);
+                        board.MakeMove(move, (board.round % 2) + 1);
                         Console.WriteLine("place_disc {0}", move);
                         Console.WriteLine(board.ToString());
                         break;

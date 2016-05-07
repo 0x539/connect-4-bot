@@ -8,6 +8,25 @@ namespace Connect_4_Bot
         public int[][] _boardArray { get; set; }
         private int _mybotId;
 
+        public int round {
+            get
+            {
+                int count = 0;
+                for (int x = 0; x < this._boardArray.Length; x++)
+                {
+                    for (int y = 0; y < this._boardArray[x].Length; y++)
+                    {
+                        if (this._boardArray[x][y] != 0)
+                        {
+                            count++;
+                        }
+                    }
+                }
+
+                return count;
+            }
+        }
+
         public void SetMyBotId(int myBotId)
         {
             _mybotId = myBotId;
