@@ -7,6 +7,8 @@ namespace Connect_4_Bot
 {
     public class Session
     {
+        public int round { get; private set; }
+
         private int[][] generateEmptyBoard()
         {
             int columns = 7;
@@ -68,8 +70,9 @@ namespace Connect_4_Bot
                         break;
                     case "action":
                         var move = strategy.NextMove(board);
-                        board.makeMove(move);
+                        board.MakeMove(move, (round++ % 2) + 1);
                         Console.WriteLine("place_disc {0}", move);
+                        Console.WriteLine(board.ToString());
                         break;
                 }
             }

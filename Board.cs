@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Connect_4_Bot
 {
-    public class Board : ICloneable
+    public class Board
     {
         public int[][] _boardArray { get; set; }
         private int _mybotId;
@@ -49,42 +49,25 @@ namespace Connect_4_Bot
             return sb.ToString();
         }
 
-        public void makeMove(int column)
+        public void MakeMove(int column, int player)
         {
-            this._boardArray[column] = this.addChip(this._boardArray[column]);
-        }
-
-        public object Clone()
-        {
-            Board n = new Board();
-
-            n.Update(this._boardArray);
-
-            return n;
-        }
-
-        private int[] addChip(int[] current)
-        {
-            if (current[current.Length - 1] != 0)
+            if (column > this._boardArray.Length)
             {
-                return current;
+                return;
             }
 
-            for (int x = 0; x < current.Length; x++)
+            int totalRows = this.RowsNumber();
+
+            for (int x = totalRows - 1; x >= 0; x--)
             {
-                if (x == current.Length - 1)
+                int[] row = this._boardArray[x];
+
+                if (row[column] == 0)
                 {
-                    current[current.Length - 1] = 1;
-                    break;
-                }
-                else if (current[x] != 0)
-                {
-                    current[x - 1] = 1;
+                    this._boardArray[x][column] = player;
                     break;
                 }
             }
-
-            return current;
         }
     }
 }

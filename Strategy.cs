@@ -9,16 +9,21 @@ namespace Connect_4_Bot
 
     public class Strategy : IStrategy
     {
-        public int move;
+        public int round;
+
+        public Strategy()
+        {
+            this.round = 0;
+        }
 
         public int NextMove(Board board)
         {
-            if (move > board.ColsNumber() - 1)
+            if (round > board.ColsNumber() - 1)
             {
-                move = 0;
+                round = 0;
             }
 
-            return move++;
+            return round++;
         }
     }
 
